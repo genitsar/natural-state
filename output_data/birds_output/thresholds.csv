@@ -1,0 +1,5 @@
+commonName,total,true_class,false_class,method,intercept,slope,threshold
+Abyssinian Nightjar,150,117,33,fitted,38.81308387174542,4.217463820997506,0.0002994096641566993
+African Black-headed Oriole,150,150,0,accept_all,,,
+Red-billed Firefinch,101,6,95,accept_none,,,
+Three-banded Plover,150,149,1,accept_all,,,
