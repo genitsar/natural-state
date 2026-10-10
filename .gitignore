@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# IDE and local tooling
+.idea/
+.claude/
+.mcp.json
+
+# Source data supplied by Natural State: kept local, not published
+input_data/**/*.csv
+input_data/**/*.xlsx
+input_data/**/*.pdf
