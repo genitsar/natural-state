@@ -32,6 +32,7 @@ class Reporter:
     def count_flags(flags, by):
         """ Counts errors and warnings per plot or per survey """
 
+
         counted = flags[flags["severity"].isin(["error", "warning"])]
         counts = counted.groupby([by, "severity"]).size().unstack(fill_value=0)
         counts = counts.reindex(columns=["error", "warning"], fill_value=0)
