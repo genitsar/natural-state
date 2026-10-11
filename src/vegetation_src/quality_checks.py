@@ -30,6 +30,7 @@ class Checker:
     def make_flags(rows, level, check, severity, key_column, detail):
         """ Turns the rows that fail a check into flags with a common set of columns """
 
+
         flags = pd.DataFrame({
             "level": level,
             "check": check,
