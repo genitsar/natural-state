@@ -128,7 +128,7 @@ class Loader:
         frame = tables["centroids"][["choice_name", "sample_status", "stratum_label", "geohash", "geometry"]]
         frame = frame.rename(columns={"choice_name": "plot_name", "stratum_label": "stratum"})
 
-        # geometry is a text of the form "latitude longitude altitude accuracy"
+        # geometry is a text of the form "latitude longitude latitude accuracy"
         coordinates = frame["geometry"].str.split(expand=True).astype(float)
         frame = frame.assign(lat=coordinates[0], lon=coordinates[1]).drop(columns="geometry")
 
@@ -157,6 +157,7 @@ class Loader:
         # Direction of the transect: 0 is north-south, 90 is east-west
         east, north = Loader.to_local_metres(plots["b_lat"], plots["b_lon"], plots["a_lat"], plots["a_lon"])
         plots["bearing_deg"] = np.degrees(np.arctan2(east, north)) % 180
+
 
         return plots
 
