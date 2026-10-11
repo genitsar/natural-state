@@ -37,6 +37,8 @@ For one species:
 
 5. A prediction is an observation when `confidence >= threshold`.
 
+**What the threshold means.** The threshold is the confidence score at which a prediction's probability of being correct reaches 99%. Predictions above it are more likely still to be correct, so this implies a positive predictive value (precision) of at least 99% for the observations, to the extent that the fitted curve is right. It is a statement about how trustworthy the kept predictions are. It says nothing about recall, the share of correct predictions that are kept.
+
 Step 3 only works when the validated clips contain enough of both verdicts. When they do not, a rule replaces the curve:
 
 | Validated clips for the species | Method | Effect on its predictions |
@@ -164,14 +166,26 @@ Small checks that catch most problems:
 
 Running both jobs on the sample files must reproduce these figures.
 
-| Species | Method | Threshold | Predictions | Observations |
-|---|---|---|---|---|
-| Abyssinian Nightjar | `fitted` | 0.6666 | 10,187 | 3,147 |
-| African Black-headed Oriole | `accept_all` | none | 18,054 | 18,054 |
-| Three-banded Plover | `accept_all` | none | 1,015 | 1,015 |
-| Red-billed Firefinch | `accept_none` | none | 235 | 0 |
+| Species | Method | Threshold |
+|---|---|---|
+| Abyssinian Nightjar | `fitted` | 0.6666 |
+| African Black-headed Oriole | `accept_all` | none |
+| Three-banded Plover | `accept_all` | none |
+| Red-billed Firefinch | `accept_none` | none |
 
-Nightjar intercept 3.1590 and slope 2.0723. Total observations 22,216 of 29,491.
+Nightjar intercept 3.1590 and slope 2.0723.
+
+The labelled results:
+
+| Species | Predictions | Labelled as observation | Left empty |
+|---|---|---|---|
+| African Black-headed Oriole | 18,054 | 18,054 | 0 |
+| Three-banded Plover | 1,015 | 1,015 | 0 |
+| Abyssinian Nightjar | 10,187 | 3,147 | 7,040 |
+| Red-billed Firefinch | 235 | 0 | 235 |
+| Total | 29,491 | 22,216 | 7,275 |
+
+An empty `observation` means the prediction is not certain enough to count. It does not mean the species is absent, and the interface should not present it that way.
 
 Edge cases the reference tests cover, in `src/birds_src/test_files/`:
 

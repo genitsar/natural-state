@@ -38,6 +38,8 @@ For each species separately:
 3. **Solve for the threshold.** Find the score at which the fitted probability is 0.99.
 4. **Label.** A prediction at or above its species' threshold is an observation.
 
+**What the threshold means.** The threshold is the confidence score at which a prediction's probability of being correct reaches 99%. Predictions above it are more likely still to be correct, so this implies a positive predictive value (precision) of at least 99% for the observations, to the extent that the fitted curve is right. It is a statement about how trustworthy the kept predictions are. It says nothing about recall, the share of correct predictions that are kept.
+
 In machine learning terms this is calibration: turning a model's raw score into a probability.
 
 ![Validated clips and fitted calibration curve, by species](../output_data/birds_output/figures/calibration_curves.png)
@@ -85,6 +87,25 @@ Only 6 of 101 validated clips are correct, and five of those six have scores bel
 - **Decision:** accept no predictions.
 - **A fitted curve agrees:** fitting one anyway gives a threshold of 0.998, and the highest Firefinch score in the predictions is 0.907. No clip would qualify.
 - **What this means:** BirdNET is not usable for this species with these recordings. This is a finding, not a gap in the method. The 235 predictions are best treated as unverified.
+
+## Labelled results
+
+Applying the four rules to all 29,491 predictions gives the `observation` field.
+
+| Species | Predictions | Labelled as observation | Left empty |
+|---|---|---|---|
+| African Black-headed Oriole | 18,054 | 18,054 | 0 |
+| Three-banded Plover | 1,015 | 1,015 | 0 |
+| Abyssinian Nightjar | 10,187 | 3,147 | 7,040 |
+| Red-billed Firefinch | 235 | 0 | 235 |
+| Total | 29,491 | 22,216 | 7,275 |
+
+The 7,275 predictions left empty are there for two different reasons:
+
+- **Firefinch (235):** none are labelled, whatever their score, because BirdNET was wrong in 95 of the 101 validated clips.
+- **Nightjar (7,040):** only predictions with a score of 0.667 or higher are labelled. Those below it are less than 99% likely to be correct according to the fitted curve.
+
+An empty `observation` means "not certain enough to count", not "the species is absent". Many of the unlabelled Nightjar predictions are real: in the validated sample, 43 of the 76 clips below the threshold were correct.
 
 ## Decisions and assumptions
 
