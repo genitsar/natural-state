@@ -4,7 +4,7 @@ Take-home project for the Senior Data Scientist role at Natural State. It has tw
 
 | Challenge | Report | Tech hand-off | Run it |
 |---|---|---|---|
-| Birds | [docs/birds_report.md](docs/birds_report.md) (in progress) | [docs/birds_tech_handoff.md](docs/birds_tech_handoff.md) (in progress) | `python run_birds.py` |
+| Birds | [docs/birds_report.md](docs/birds_report.md) | [docs/birds_tech_handoff.md](docs/birds_tech_handoff.md) | `python run_birds.py` |
 | Vegetation | [docs/vegetation_report.md](docs/vegetation_report.md) | [docs/vegetation_tech_handoff.md](docs/vegetation_tech_handoff.md) | `python run_vegetation.py` |
 
 ### Bird Analysis
@@ -20,7 +20,7 @@ Take-home project for the Senior Data Scientist role at Natural State. It has tw
 | Three-banded Plover | 149 of 150 | Accept all | none | 1,015 | 1,015 |
 | Red-billed Firefinch | 6 of 101 | Accept none | none | 235 | 0 |
 
-**Code.** `src/birds_src/`: `class_balance.py` counts correct and incorrect clips per species, `calibrate.py` fits the curve and finds the threshold, `label_predictions.py` adds the `observation` column.
+**Code.** `src/birds_src/`: `class_balance.py` counts correct and incorrect clips per species, `calibrate.py` fits the curve and finds the threshold, `label_predictions.py` adds the `observation` column, `plot_calibration.py` draws the calibration figure.
 
 ### Vegetation Analysis
 

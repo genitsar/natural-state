@@ -8,12 +8,14 @@ import pandas as pd
 from src.birds_src.class_balance import Balancer
 from src.birds_src.calibrate import Calibrator
 from src.birds_src.label_predictions import Labeller
+from src.birds_src.plot_calibration import CalibrationPlotter
 
 VALIDATION_PATH = "input_data/birds_input/validation_results.csv"
 PREDICTIONS_PATH = "input_data/birds_input/birdnet_predictions.csv"
 OUTPUT_PATH = "output_data/birds_output/class_balance.csv"
 THRESHOLDS_PATH = "output_data/birds_output/thresholds.csv"
 LABELLED_PATH = "output_data/birds_output/birdnet_predictions_labelled.csv"
+FIGURE_PATH = "output_data/birds_output/figures/calibration_curves.png"
 
 def main():
 
@@ -27,6 +29,9 @@ def main():
     thresholds = Calibrator.calibrate(validation)
     print(thresholds.to_string(index=False))
     thresholds.to_csv(THRESHOLDS_PATH, index=False)
+
+    # Draw the validated clips and the fitted curve per species
+    CalibrationPlotter.draw_calibration(validation, thresholds, FIGURE_PATH)
 
     # Read predictions data
     predictions = pd.read_csv(PREDICTIONS_PATH)
