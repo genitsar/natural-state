@@ -7,10 +7,13 @@ import pandas as pd
 
 from src.birds_src.class_balance import Balancer
 from src.birds_src.calibrate import Calibrator
+from src.birds_src.label_predictions import Labeller
 
 VALIDATION_PATH = "input_data/birds_input/validation_results.csv"
+PREDICTIONS_PATH = "input_data/birds_input/birdnet_predictions.csv"
 OUTPUT_PATH = "output_data/birds_output/class_balance.csv"
 THRESHOLDS_PATH = "output_data/birds_output/thresholds.csv"
+LABELLED_PATH = "output_data/birds_output/birdnet_predictions_labelled.csv"
 
 def main():
 
@@ -25,8 +28,13 @@ def main():
     print(thresholds.to_string(index=False))
     thresholds.to_csv(THRESHOLDS_PATH, index=False)
 
+    # Read predictions data
+    predictions = pd.read_csv(PREDICTIONS_PATH)
+
     # Step 3: Add the observation column to the predictions
-    # (src/birds_src/label_predictions.py, not written yet)
+    labelled = Labeller.label_observations(predictions, thresholds)
+    print(Labeller.count_observations(labelled).to_string(index=False))
+    labelled.to_csv(LABELLED_PATH, index=False)
 
 
 if __name__ == "__main__":

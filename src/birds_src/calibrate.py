@@ -51,7 +51,7 @@ class Calibrator:
         X = Calibrator.to_logit_scale(X)
 
         # Adds a column of 1s to the predictor data so that the model estimates also an intercept
-        X = sm.add_constant(Calibrator.to_logit_scale(X))
+        X = sm.add_constant(X)
 
         # Fit logistic regression model
         model = sm.GLM(y, X, family=sm.families.Binomial()).fit()

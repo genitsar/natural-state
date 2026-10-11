@@ -9,12 +9,12 @@ OUTPUT_PATH = "../../../output_data/birds_output/thresholds.csv"
 # -------- Testing class functionality --------
 
 
-# Test functions to_logit and to_confidence
+# Test functions to_logit_scale and to_logistic_scale
 # Expected: 0.5 -> 0, 0.9 -> 2.197, and 1.0 capped to 0.9999 -> 9.210
 scores = pd.Series([0.1, 0.5, 0.9, 1.0])
-logits = Calibrator.to_logit(scores)
+logits = Calibrator.to_logit_scale(scores)
 print(logits.round(3).tolist())
-print(Calibrator.to_confidence(logits).round(4).tolist())
+print(Calibrator.to_logistic_scale(logits).round(4).tolist())
 
 # Test function find_threshold
 # Expected: with intercept 0 and slope 1 the threshold is the target itself, 0.99

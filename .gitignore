@@ -12,3 +12,6 @@ __pycache__/
 input_data/**/*.csv
 input_data/**/*.xlsx
 input_data/**/*.pdf
+
+# Labelled predictions: a full copy of the source data plus one column, kept local
+output_data/birds_output/birdnet_predictions_labelled.csv
