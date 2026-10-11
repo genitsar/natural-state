@@ -64,6 +64,7 @@ All 150 validated clips are correct, across scores from 0.10 to 0.99. With no in
 
 - **Decision:** accept every prediction as an observation.
 - **What the evidence supports:** 150 correct out of 150 shows, with 95% confidence, that precision is at least 98.0%. It does not show 99%. That would take about 300 validated clips with no errors.
+- **Where those numbers come from:** if precision is `p`, the chance that 150 independent clips are all correct is `p^150`. At exactly 99% that chance is `0.99^150` = 22%, so a clean sample of 150 cannot rule out 99%, or values a little below it. Solving `p^150 = 0.05` gives `p` = 98.0%, the lowest precision that is still consistent with the sample at the usual 5% level. Solving `0.99^n = 0.05` gives `n` = 299, the number of clips with no errors needed to support 99%. A quick check is the rule of three: with no errors in `n` clips, the error rate is at most about `3 / n`.
 - **Why accept rather than reject:** the evidence points strongly one way, there is no sign that low-scoring predictions are worse, and rejecting 18,054 predictions that are almost all correct would discard the most informative species in the dataset.
 
 ### Three-banded Plover: all predictions accepted

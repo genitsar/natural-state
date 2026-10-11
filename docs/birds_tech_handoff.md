@@ -146,6 +146,7 @@ The method depends on the validated sample, so the platform should help choose i
 - **Sample across the whole score range,** not only the top. The curve is defined by where incorrect clips give way to correct ones.
 - **Aim for at least 150 clips per species,** and continue until there are at least 10 of each verdict or it is clear there will not be.
 - **Add low-scoring clips for species with no errors so far.** That is where an error is most likely, and about 300 clips with no errors are needed to support 99%.
+  The 300 comes from `0.99^n = 0.05`, which gives `n` = 299: if precision were only 99%, a run of that many correct clips would happen by chance less than 5% of the time. With the 150 in the sample, `0.99^150` = 22%, which is not rare enough to rule anything out.
 - **Re-validate when conditions change:** new recorder hardware, a new site, a new season, or a new BirdNET version.
 
 A species in `accept_all` or `accept_none` should be listed as "needs more validation" so it does not stay on a rule indefinitely.
